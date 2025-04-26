@@ -17,3 +17,9 @@ venv/
 # Ignore IDE/editor settings
 .vscode/
 .idea/
+
+# Ignore user-specific voacbulary cache
+voacbulary_cache.json
+
+# tests notebooks
+tests_notebooks.ipynb
