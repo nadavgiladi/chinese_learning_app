@@ -1,7 +1,7 @@
 from dotenv import load_dotenv
 from openai import OpenAI
 from introduced_vocabulary_handling.cache_handler import *
-from cache_handler import handle_tool_calls
+from tools_handler import handle_tool_calls
 
 def stream_gpt(prompt, system_message, chat_history):
     """
