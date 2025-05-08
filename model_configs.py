@@ -1,3 +1,4 @@
+
 class ModelConfig:
     def __init__(self):
         self.model_name = "gpt-4o-mini-2024-07-18"
