@@ -1,14 +1,11 @@
 from stream_gpt import stream_gpt
 
-system_prompt = "You are a Chinese teacher for an English speaker that knows very little Chinese. " \
-"All lessons should not be longer than 5 minutes, unless specified otherwise explicitly. You don't have audio inputs capability." \
-"So expect testing the student by examining his input text"
-
-def chat_session(system_message):
+def chat_session():
     """
     Creates a chat session where the chat history is preserved.
     Allows the user to interact with the chatbot in a session-like manner.
     """
+
     chat_history = []  # Initialize an empty chat history
     print("Chat session started. Type 'exit' to end the session.\n")
 
@@ -20,7 +17,7 @@ def chat_session(system_message):
             break
 
 
-        result = stream_gpt(prompt, system_message, chat_history)
+        result = stream_gpt(prompt, chat_history)
         print("Bot:", end=" ")
         for item in result:  
             print(item, end="", flush=True)
@@ -28,4 +25,4 @@ def chat_session(system_message):
 
 if __name__ == "__main__":
     # Start the chat session with the system prompt
-    chat_session(system_prompt)
+    chat_session()

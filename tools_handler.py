@@ -11,6 +11,7 @@ def handle_tool_calls(final_tool_calls_request_dict):
         function_name_to_call = tool_call_req_val.function.name
         
         if function_name_to_call == 'write_to_cache':
+            print("write_to_cache function called")
             arguments = json.loads(tool_call_req_val.function.arguments)
             words_list = arguments.get('words_list')
             write_to_cache(words_list)
@@ -20,6 +21,7 @@ def handle_tool_calls(final_tool_calls_request_dict):
                 "tool_call_id": tool_call_req_val.id
             }
         elif function_name_to_call == 'initialize_and_read_cache':
+            print("initialize_and_read_cache function called")
             known_words_dict = initialize_and_read_cache()
             tool_message = {
                 "role": "tool",

@@ -2,16 +2,24 @@ from dotenv import load_dotenv
 from openai import OpenAI
 from introduced_vocabulary_handling.cache_handler import *
 from tools_handler import handle_tool_calls
+from model_configs import ModelConfig
 
-def stream_gpt(prompt, system_message, chat_history):
+
+
+def stream_gpt(prompt, chat_history):
     """
     Stream the response from the OpenAI API using the GPT-4o model. Including tool calls handling and chat history management. 
     """
 
+    # load configured model name and system message
+    model_configs = ModelConfig()
+    model_version = model_configs.model_name
+    system_message = model_configs.system_message
+
     load_dotenv(override=True)
     openai_api_key = os.getenv('OPENAI_API_KEY')
     openai = OpenAI()
-    model_name = 'gpt-4o'
+    model_name = model_version
 
     # construct the tools objects list
     tools_object_list = construct_tools_object_list()
