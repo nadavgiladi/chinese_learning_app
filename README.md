@@ -19,9 +19,9 @@ This project is a chatbot-based Chinese learning application designed to help En
 ## Getting Started
 1. **Install Dependecies**: on your terminal go to the project path and run: ```pip install -r requirements.txt```
 2. **Set Up Environment Variables**: Create a .env file inside the project's main folder and add your:
-  OpenAI API key: ```OPENAI_API_KEY=your_openai_api_key```
-  News API key: ```NEWS_API_KEY=your_news_api_key```
-  Rapid API key for ```fresh-linkedin-profile-data```: ```RAPIDAPI_KEY=2281f1e2bdmsh002721f6906ab46p1ea867jsn903210fe8cc2```
+  - OpenAI API key: ```OPENAI_API_KEY=your_openai_api_key```
+  - News API key: ```NEWS_API_KEY=your_news_api_key```
+  - Rapid API key for ```fresh-linkedin-profile-data```: ```RAPIDAPI_KEY=2281f1e2bdmsh002721f6906ab46p1ea867jsn903210fe8cc2```
   (Go to rapidapi.com -> search for fresh-linkedin-profile-data -> register for the free tier and get your key)
 
 3. **Run the App**: ```python3 main.py```
