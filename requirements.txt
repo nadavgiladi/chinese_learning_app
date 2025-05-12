@@ -43,3 +43,7 @@ speedtest-cli
 sentence_transformers
 feedparser
 google-genai
+mcp[cli]
+ipykernel
+httpx
+fastmcp

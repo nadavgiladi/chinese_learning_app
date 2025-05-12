@@ -1,14 +1,15 @@
+import os
 from dotenv import load_dotenv
 from openai import OpenAI
-from introduced_vocabulary_handling.cache_handler import *
-from tools_handler import handle_tool_calls
+from introduced_vocabulary_and_tools_handling.tools_handler_mcp import handle_tool_calls
 from model_configs import ModelConfig
+from introduced_vocabulary_and_tools_handling.tools_mcp import tools_sse_client
 
 
 
-def stream_gpt(prompt, chat_history):
+async def stream_gpt_mcp(client, prompt, chat_history):
     """
-    Stream the response from the OpenAI API using the GPT-4o model. Including tool calls handling and chat history management. 
+    Stream the response from the OpenAI API using a configured model version. Including tool calls handling and chat history management. 
     """
 
     # load configured model name and system message
@@ -20,9 +21,9 @@ def stream_gpt(prompt, chat_history):
     openai_api_key = os.getenv('OPENAI_API_KEY')
     openai = OpenAI()
     model_name = model_version
-
-    # construct the tools objects list
-    tools_object_list = construct_tools_object_list()
+    
+    # construct the tools objects list as expected by OpenAI
+    tools_object_list = await tools_sse_client.list_tools(client)
 
     # Add system message and chat history to the messages list
     messages = [{"role": "system", "content": system_message}] + chat_history
@@ -65,7 +66,7 @@ def stream_gpt(prompt, chat_history):
             chat_history.append({"role":"assistant", "content": None, "tool_calls": tool_calls_list})
 
             # construct the tool_messages messages
-            tool_messages = handle_tool_calls(final_tool_calls_request_dict)
+            tool_messages = await handle_tool_calls(client, final_tool_calls_request_dict)
 
             # add each tool message to the messages
             for tool_message in tool_messages:
@@ -88,3 +89,4 @@ def stream_gpt(prompt, chat_history):
     
     messages.append({"role": "assistant", "content": full_response_text})
     chat_history.append({"role": "assistant", "content": full_response_text})
+
